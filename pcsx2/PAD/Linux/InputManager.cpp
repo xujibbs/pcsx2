@@ -74,6 +74,6 @@ void InputDeviceManager::Update()
 void EnumerateDevices()
 {
 #ifdef SDL_BUILD
-	JoystickInfo::EnumerateJoysticks(device_manager.devices);
+	EnumerateJoysticks(device_manager.devices);
 #endif
 }

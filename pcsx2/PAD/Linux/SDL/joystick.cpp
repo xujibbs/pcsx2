@@ -25,8 +25,7 @@
 // Joystick definitions //
 //////////////////////////
 
-// opens handles to all possible joysticks
-void JoystickInfo::EnumerateJoysticks(std::vector<std::unique_ptr<Device>>& vjoysticks)
+void Initialise_SDL()
 {
 	uint32_t flag = SDL_INIT_JOYSTICK | SDL_INIT_HAPTIC | SDL_INIT_EVENTS | SDL_INIT_GAMECONTROLLER;
 
@@ -50,10 +49,10 @@ void JoystickInfo::EnumerateJoysticks(std::vector<std::unique_ptr<Device>>& vjoy
 			return;
 
 		// WTF! Give me back the control of my system
-		struct sigaction action = {};
-		action.sa_handler = SIG_DFL;
-		sigaction(SIGINT, &action, nullptr);
-		sigaction(SIGTERM, &action, nullptr);
+		//struct sigaction action = {};
+		//action.sa_handler = SIG_DFL;
+		//sigaction(SIGINT, &action, nullptr);
+		//sigaction(SIGTERM, &action, nullptr);
 
 		SDL_JoystickEventState(SDL_QUERY);
 		SDL_GameControllerEventState(SDL_QUERY);
@@ -72,7 +71,12 @@ void JoystickInfo::EnumerateJoysticks(std::vector<std::unique_ptr<Device>>& vjoy
 				SDL_GameControllerAddMapping(map.c_str());
 		}
 	}
+}
 
+// opens handles to all possible joysticks
+void EnumerateJoysticks(std::vector<std::unique_ptr<Device>>& vjoysticks)
+{
+	Initialise_SDL();
 	vjoysticks.clear();
 
 	for (int i = 0; i < SDL_NumJoysticks(); ++i)
@@ -139,31 +143,6 @@ JoystickInfo::JoystickInfo(int id)
 	, m_unique_id(0)
 {
 	SDL_Joystick* joy = nullptr;
-	// Values are hardcoded currently but it could be later extended to allow remapping of the buttons
-	m_pad_to_sdl[PAD_L2] = SDL_CONTROLLER_AXIS_TRIGGERLEFT;
-	m_pad_to_sdl[PAD_R2] = SDL_CONTROLLER_AXIS_TRIGGERRIGHT;
-	m_pad_to_sdl[PAD_L1] = SDL_CONTROLLER_BUTTON_LEFTSHOULDER;
-	m_pad_to_sdl[PAD_R1] = SDL_CONTROLLER_BUTTON_RIGHTSHOULDER;
-	m_pad_to_sdl[PAD_TRIANGLE] = SDL_CONTROLLER_BUTTON_Y;
-	m_pad_to_sdl[PAD_CIRCLE] = SDL_CONTROLLER_BUTTON_B;
-	m_pad_to_sdl[PAD_CROSS] = SDL_CONTROLLER_BUTTON_A;
-	m_pad_to_sdl[PAD_SQUARE] = SDL_CONTROLLER_BUTTON_X;
-	m_pad_to_sdl[PAD_SELECT] = SDL_CONTROLLER_BUTTON_BACK;
-	m_pad_to_sdl[PAD_L3] = SDL_CONTROLLER_BUTTON_LEFTSTICK;
-	m_pad_to_sdl[PAD_R3] = SDL_CONTROLLER_BUTTON_RIGHTSTICK;
-	m_pad_to_sdl[PAD_START] = SDL_CONTROLLER_BUTTON_START;
-	m_pad_to_sdl[PAD_UP] = SDL_CONTROLLER_BUTTON_DPAD_UP;
-	m_pad_to_sdl[PAD_RIGHT] = SDL_CONTROLLER_BUTTON_DPAD_RIGHT;
-	m_pad_to_sdl[PAD_DOWN] = SDL_CONTROLLER_BUTTON_DPAD_DOWN;
-	m_pad_to_sdl[PAD_LEFT] = SDL_CONTROLLER_BUTTON_DPAD_LEFT;
-	m_pad_to_sdl[PAD_L_UP] = SDL_CONTROLLER_AXIS_LEFTY;
-	m_pad_to_sdl[PAD_L_RIGHT] = SDL_CONTROLLER_AXIS_LEFTX;
-	m_pad_to_sdl[PAD_L_DOWN] = SDL_CONTROLLER_AXIS_LEFTY;
-	m_pad_to_sdl[PAD_L_LEFT] = SDL_CONTROLLER_AXIS_LEFTX;
-	m_pad_to_sdl[PAD_R_UP] = SDL_CONTROLLER_AXIS_RIGHTY;
-	m_pad_to_sdl[PAD_R_RIGHT] = SDL_CONTROLLER_AXIS_RIGHTX;
-	m_pad_to_sdl[PAD_R_DOWN] = SDL_CONTROLLER_AXIS_RIGHTY;
-	m_pad_to_sdl[PAD_R_LEFT] = SDL_CONTROLLER_AXIS_RIGHTX;
 
 	if (SDL_IsGameController(id))
 	{
@@ -203,6 +182,11 @@ JoystickInfo::JoystickInfo(int id)
 	m_unique_id = hash_me(std::string(guid));
 
 	bool rumble_support = SDL_GameControllerRumble(m_controller, 0, 0, 1) >= 0;
+
+	// Customise button mappings here. Right now, goes to default settings. If it's a switch-style controller, switch_sdl_button_map would be better,
+	// but a setting needs to be implemented for that.
+	//m_pad_to_sdl = default_sdl_button_map;
+	m_pad_to_sdl = switch_sdl_button_map;
 
 	Console.WriteLn("PAD: controller (%s) detected%s, GUID:%s",
 			m_device_name.c_str(), rumble_support ? " with rumble support" : "", guid);
