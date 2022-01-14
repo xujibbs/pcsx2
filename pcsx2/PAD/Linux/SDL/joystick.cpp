@@ -185,8 +185,8 @@ JoystickInfo::JoystickInfo(int id)
 
 	// Customise button mappings here. Right now, goes to default settings. If it's a switch-style controller, switch_sdl_button_map would be better,
 	// but a setting needs to be implemented for that.
-	//m_pad_to_sdl = default_sdl_button_map;
-	m_pad_to_sdl = switch_sdl_button_map;
+	m_pad_to_sdl = default_sdl_button_map;
+	//m_pad_to_sdl = switch_sdl_button_map;
 
 	Console.WriteLn("PAD: controller (%s) detected%s, GUID:%s",
 			m_device_name.c_str(), rumble_support ? " with rumble support" : "", guid);
