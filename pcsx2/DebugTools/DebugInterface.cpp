@@ -31,7 +31,7 @@ R5900DebugInterface r5900Debug;
 R3000DebugInterface r3000Debug;
 
 #ifdef _WIN32
-#define strcasecmp stricmp
+#define strcasecmp _stricmp
 #endif
 
 enum ReferenceIndexType

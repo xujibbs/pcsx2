@@ -74,19 +74,4 @@
 typedef void FnType_Void();
 typedef FnType_Void* Fnptr_Void;
 
-// --------------------------------------------------------------------------------------
-//  Compiler/OS specific macros and defines 
-// --------------------------------------------------------------------------------------
-
-#if defined(_MSC_VER)
-
-#	define strnicmp _strnicmp
-#	define stricmp _stricmp
-
-#else	// must be GCC or Clang
-
-#include <sys/types.h>
-
-#endif
-
 #endif

@@ -22,7 +22,7 @@ SymbolMap R5900SymbolMap;
 SymbolMap R3000SymbolMap;
 
 #ifdef _WIN32
-#define strcasecmp stricmp
+#define strcasecmp _stricmp
 #endif
 
 #define ARRAY_SIZE(x) (sizeof((x))/sizeof(*(x)))
