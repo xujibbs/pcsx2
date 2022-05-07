@@ -55,13 +55,6 @@
 #include <sys/stat.h>
 #include <pthread.h>
 
-
-#undef  TRUE
-#undef  FALSE
-#define TRUE  1
-#define FALSE 0
-
-
 //////////////////////////////////////////////////////////////////////////////////////////
 // Begin Pcsx2 Includes: Add items here that are local to Pcsx2 but stay relatively
 // unchanged for long periods of time, or happen to be used by almost everything, so they
