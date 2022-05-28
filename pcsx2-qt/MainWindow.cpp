@@ -330,25 +330,44 @@ namespace ThemeColor
 	const QColor light_amber(255, 215, 0);
 	const QColor med_amber(255, 191, 0);
 	const QColor dark_amber(204, 153, 0);
+
+	// Solarized
+	const QColor solarized_base03(0, 43, 54);
+	const QColor solarized_base02(7, 54, 66);
+	const QColor solarized_base01(88, 110, 117);
+	const QColor solarized_base00(101, 123, 131);
+	const QColor solarized_base0(131, 148, 150);
+	const QColor solarized_base1(147, 161, 161);
+	const QColor solarized_base2(238, 232, 213);
+	const QColor solarized_base3(253, 246, 227);
+	const QColor solarized_yellow(181, 137, 0);
+	const QColor solarized_orange(203, 75, 22);
+	const QColor solarized_red(220, 50, 47);
+	const QColor solarized_magenta(211, 54, 130);
+	const QColor solarized_violet(108, 113, 196);
+	const QColor solarized_blue(38, 139, 210);
+	const QColor solarized_cyan(42, 161, 152);
+	const QColor solarized_green(133, 153, 0);
+
 };
 
-QPalette setTheme( QColor qc_window_color,
-								QColor qc_window_text,
-								QColor qc_base,
-								QColor qc_alt_base,
-								QColor qc_tooltip_base,
-								QColor qc_tooltip_text,
-								QColor qc_text,
-								QColor qc_button,
-								QColor qc_button_text,
-								QColor qc_link,
-								QColor qc_highlight,
-								QColor qc_highlight_text,
-								QColor qc_active_button,
-								QColor qc_disabled_button_text,
-								QColor qc_disabled_window_text,
-								QColor qc_disabled_text,
-								QColor qc_disabled_light
+QPalette setTheme( QColor qc_window_color, 	// windows background behind icons
+								QColor qc_window_text, 	//active checkbox text
+								QColor qc_base,	// iso row color
+								QColor qc_alt_base,	// iso row alt color
+								QColor qc_tooltip_base,	// tooltip background
+								QColor qc_tooltip_text,	// pulldown background
+								QColor qc_text,	// iso active text
+								QColor qc_button,	// disabled button
+								QColor qc_button_text,	// active button/menu text
+								QColor qc_link,	// unselected pulldown background
+								QColor qc_highlight,	// highlighted iso
+								QColor qc_highlight_text,	// hilighted iso text
+								QColor qc_active_button,	// active button highlight
+								QColor qc_disabled_button_text, 	// disabled button text
+								QColor qc_disabled_window_text,	// disabled checkbox text
+								QColor qc_disabled_text,	// disabled menu item
+								QColor qc_disabled_light	// disabled top list bar
 )
 {
 		QPalette pal;
