@@ -236,6 +236,7 @@ GraphicsSettingsWidget::GraphicsSettingsWidget(SettingsDialog* dialog, QWidget* 
 	//////////////////////////////////////////////////////////////////////////
 	SettingWidgetBinder::BindWidgetToIntSetting(sif, m_ui.halfScreenFix, "EmuCore/GS", "UserHacks_Half_Bottom_Override", -1, -1);
 	SettingWidgetBinder::BindWidgetToIntSetting(sif, m_ui.cpuSpriteRenderBW, "EmuCore/GS", "UserHacks_CPUSpriteRenderBW", 0);
+	SettingWidgetBinder::BindWidgetToIntSetting(sif, m_ui.cpuCLUTRender, "EmuCore/GS", "UserHacks_CPUCLUTRender", 0);
 	SettingWidgetBinder::BindWidgetToIntSetting(sif, m_ui.skipDrawStart, "EmuCore/GS", "UserHacks_SkipDraw_Start", 0);
 	SettingWidgetBinder::BindWidgetToIntSetting(sif, m_ui.skipDrawEnd, "EmuCore/GS", "UserHacks_SkipDraw_End", 0);
 	SettingWidgetBinder::BindWidgetToBoolSetting(sif, m_ui.hwAutoFlush, "EmuCore/GS", "UserHacks_AutoFlush", false);
@@ -334,7 +335,7 @@ GraphicsSettingsWidget::GraphicsSettingsWidget(SettingsDialog* dialog, QWidget* 
 	if (!m_dialog->isPerGameSettings())
 	{
 		m_ui.upscalingFixesLayout->removeRow(2);
-		m_ui.hardwareFixesLayout->removeRow(2);
+		m_ui.hardwareFixesLayout->removeRow(1);
 		m_ui.skipDrawStart = nullptr;
 		m_ui.skipDrawEnd = nullptr;
 		m_ui.textureOffsetX = nullptr;
