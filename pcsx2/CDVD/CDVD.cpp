@@ -815,13 +815,13 @@ static uint cdvdBlockReadTime(CDVD_MODE_TYPE mode)
 		const float sectorSpeed = ((static_cast<float>(cdvd.SeekToSector - offset) / static_cast<float>(numSectors)) * 0.60f) + 0.40f;
 		float cycles = static_cast<float>(PSXCLK) / (static_cast<float>(((mode == MODE_CDROM) ? CD_SECTORS_PERSECOND : DVD_SECTORS_PERSECOND) * cdvd.Speed) * sectorSpeed);
 
-		return static_cast<int>(cycles);
+		return static_cast<int>(cycles * 1.2f);
 	}
 
 	// CLV Read Speed is constant
 	float cycles = static_cast<float>(PSXCLK) / static_cast<float>(((mode == MODE_CDROM) ? CD_SECTORS_PERSECOND : DVD_SECTORS_PERSECOND) * cdvd.Speed);
 
-	return static_cast<int>(cycles);
+	return static_cast<int>(cycles * 1.2f);
 }
 
 void cdvdReset()
