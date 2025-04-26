@@ -242,7 +242,7 @@ u32 NewSymbolDialog::parseAddress(QString& error_message)
 NewFunctionDialog::NewFunctionDialog(DebugInterface& cpu, QWidget* parent)
 	: NewSymbolDialog(GLOBAL_STORAGE | SIZE_FIELD | EXISTING_FUNCTIONS_FIELD, 4, cpu, parent)
 {
-	setWindowTitle("New Function");
+	setWindowTitle(tr("New Function"));
 
 	m_ui.customSizeSpinBox->setValue(8);
 }
